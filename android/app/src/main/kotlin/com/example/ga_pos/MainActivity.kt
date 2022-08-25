@@ -50,7 +50,7 @@ class MainActivity : FlutterActivity() {
                         "aid" to responseData.aid,
                         "amount" to responseData.amount,
                         "appLabel" to responseData.appLabel,
-                        "authcode" to responseData.authcode,
+                        "authCode" to responseData.authcode,
                         "bankLogo" to responseData.bankLogo,
                         "bankName" to responseData.bankName,
                         "cardHolderName" to responseData.cardHolderName,
