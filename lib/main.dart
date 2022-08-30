@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ga_pos/request_type.dart';
-import 'package:ga_pos/result_data.dart';
+import 'package:ga_pos/transaction_response_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,19 +49,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void connectToNativePlatform() {
+  Future<TransactionResponseData?> connectToNativePlatform() async {
     const channel = MethodChannel('checkout_channel');
-    channel.invokeMethod('checkout', {
-      "paymentRequest": {
-        "requestType": RequestType.BALANCE.name,
+    try {
+      final value = await channel.invokeMethod('checkout', {
+        "transType": "PURCHASE", // this must be in uppercase
         "amount": 60.0,
-        "printReceipt": true,
-      }
-    }).then((value) {
-      if (value != null) {
-        final resultData = ResultData.fromJson(value);
-      }
-    });
+        "print": true,
+      });
+
+      return TransactionResponseData.fromJson(value);
+    } on Exception catch (e) {
+      debugPrint('Error: $e');
+
+      return null;
+    }
   }
 
   @override
