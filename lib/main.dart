@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ga_pos/transaction_response_data.dart';
@@ -41,27 +43,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String _counter = "0";
 
   void _incrementCounter() {
-    setState(() {
-      _counter++;
+    _connectToNativePlatform().then((value) {
+      setState(() {
+        _counter = value.toString();
+      });
     });
   }
 
-  Future<TransactionResponseData?> connectToNativePlatform() async {
+  Future<TransactionResponseData?> _connectToNativePlatform() async {
     const channel = MethodChannel('checkout_channel');
     try {
       final value = await channel.invokeMethod('checkout', {
         "requestData": {
           "transType": "PURCHASE", // this must be in uppercase
-          "amount": 60.0,
-          "print": true,
+          "amount": "60.0",
+          "print": "true",
         }
       });
 
-      return TransactionResponseData.fromJson(value);
-    } on Exception catch (e) {
+      return TransactionResponseData.fromJson(json.decode(value ?? ''));
+    } on PlatformException catch (e) {
       debugPrint('Error: $e');
 
       return null;
@@ -85,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: ListView(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -100,13 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              _counter,
               style: Theme.of(context).textTheme.headline4,
             ),
           ],

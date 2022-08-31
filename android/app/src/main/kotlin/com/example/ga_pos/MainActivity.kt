@@ -2,6 +2,7 @@ package com.example.ga_pos
 
 import android.content.Intent
 import com.google.gson.Gson
+import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -44,20 +45,58 @@ class MainActivity : FlutterActivity() {
 
         if (requestCode == TRANSACTION_REQUEST && resultCode == RESULT_OK) {
             val status = data!!.getStringExtra("status")
-            val statusMessage = data.getStringExtra("statusMessage")
+            Log.d("gggg", "Status" + status!!)
 
-            if (status == "00") {
-                val successData = data.getStringExtra("data")
-                var jsonMap: Map<String, Any> = HashMap()
+            when (status) {
+                "00" -> {
+                    val successData = data.getStringExtra("data")
+//                    var jsonMap: Map<String, Any> = mapOf()
 
-                jsonMap = gson.fromJson(successData, jsonMap.javaClass)
-                channelResult.success(jsonMap)
-            } else {
-                channelResult.error(
-                    "com.globalaccelerex.mpos:payment",
-                    statusMessage,
-                    ""
-                )
+//                    jsonMap = gson.fromJson(successData, jsonMap.javaClass)
+                    channelResult.success(successData)
+                }
+                "02" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "FAILED",
+                        "Message sent to host but transaction has been declined."
+                    )
+                }
+                "03" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "CANCEL",
+                        "User canceled transaction, Signal lost from host, or an invalid transaction was aborted by the payment application."
+                    )
+                }
+                "04" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "INVALID FORMAT",
+                        "Invalid data format of message sent to payment application."
+                    )
+                }
+                "05" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "WRONG PARAMETER",
+                        "Invalid parameter(S) passed as part of the data sent to payment application."
+                    )
+                }
+                "06" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "TIMEOUT",
+                        "PIN entry timeout or card read timeout."
+                    )
+                }
+                else -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "Unknown error",
+                        ""
+                    )
+                }
             }
         } else {
             channelResult.error(
