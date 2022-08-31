@@ -53,9 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
     const channel = MethodChannel('checkout_channel');
     try {
       final value = await channel.invokeMethod('checkout', {
-        "transType": "PURCHASE", // this must be in uppercase
-        "amount": 60.0,
-        "print": true,
+        "requestData": {
+          "transType": "PURCHASE", // this must be in uppercase
+          "amount": 60.0,
+          "print": true,
+        }
       });
 
       return TransactionResponseData.fromJson(value);

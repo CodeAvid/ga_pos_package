@@ -30,7 +30,7 @@ class MainActivity : FlutterActivity() {
             channelResult = result
             when (call.method) {
                 "checkout" -> {
-                    val arguments = call.arguments<Map<String, Any>>()
+                    val arguments = call.argument<Map<String, Any>>("requestData")
 
                     startTransaction(arguments!!)
                 }
