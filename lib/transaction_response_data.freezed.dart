@@ -14,6 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+TransactionResponseData _$TransactionResponseDataFromJson(
+    Map<String, dynamic> json) {
+  return _TransactionResponseData.fromJson(json);
+}
+
 /// @nodoc
 mixin _$TransactionResponseData {
   String? get aid => throw _privateConstructorUsedError;
@@ -46,6 +51,7 @@ mixin _$TransactionResponseData {
   String? get baseAppVersion => throw _privateConstructorUsedError;
   String? get currency => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransactionResponseDataCopyWith<TransactionResponseData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -455,7 +461,7 @@ class __$$_TransactionResponseDataCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_TransactionResponseData implements _TransactionResponseData {
   const _$_TransactionResponseData(
       this.aid,
@@ -487,6 +493,9 @@ class _$_TransactionResponseData implements _TransactionResponseData {
       this.deviceSerialNumber,
       this.baseAppVersion,
       this.currency);
+
+  factory _$_TransactionResponseData.fromJson(Map<String, dynamic> json) =>
+      _$$_TransactionResponseDataFromJson(json);
 
   @override
   final String? aid;
@@ -602,6 +611,7 @@ class _$_TransactionResponseData implements _TransactionResponseData {
             const DeepCollectionEquality().equals(other.currency, currency));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -642,6 +652,13 @@ class _$_TransactionResponseData implements _TransactionResponseData {
       get copyWith =>
           __$$_TransactionResponseDataCopyWithImpl<_$_TransactionResponseData>(
               this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TransactionResponseDataToJson(
+      this,
+    );
+  }
 }
 
 abstract class _TransactionResponseData implements TransactionResponseData {
@@ -675,6 +692,9 @@ abstract class _TransactionResponseData implements TransactionResponseData {
       final String? deviceSerialNumber,
       final String? baseAppVersion,
       final String? currency) = _$_TransactionResponseData;
+
+  factory _TransactionResponseData.fromJson(Map<String, dynamic> json) =
+      _$_TransactionResponseData.fromJson;
 
   @override
   String? get aid;
