@@ -13,7 +13,9 @@ class MainActivity : FlutterActivity() {
     companion object {
         private const val CHANNEL = "checkout_channel"
         private const val TRANSACTION_REQUEST = 49
+        private const val KEY_EXCHANGE_REQUEST = 94
         private const val TRANSACTION_INTENT = "com.globalaccelerex.transaction"
+        private const val KEY_EXCHANGE_INTENT = "com.globalaccelerex.keyexchange"
     }
 
     private lateinit var channelResult: MethodChannel.Result
@@ -34,6 +36,9 @@ class MainActivity : FlutterActivity() {
                     val arguments = call.argument<Map<String, Any>>("requestData")
 
                     startTransaction(arguments!!)
+                }
+                "key_exchange" -> {
+                    doKeyExchange()
                 }
                 else -> result.notImplemented()
             }
@@ -98,6 +103,29 @@ class MainActivity : FlutterActivity() {
                     )
                 }
             }
+        } else if (requestCode == KEY_EXCHANGE_REQUEST && resultCode == RESULT_OK) {
+            val status = data!!.getStringExtra("status")
+            Log.d("gggg", "Status" + status!!)
+
+            when (status) {
+                "00" -> {
+                    channelResult.success("Successful")
+                }
+                "02" -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "FAILED",
+                        "Failed key exchange."
+                    )
+                }
+                else -> {
+                    channelResult.error(
+                        "com.globalaccelerex.mpos:payment",
+                        "Unknown error",
+                        ""
+                    )
+                }
+            }
         } else {
             channelResult.error(
                 "com.globalaccelerex.mpos:payment",
@@ -105,6 +133,10 @@ class MainActivity : FlutterActivity() {
                 ""
             )
         }
+    }
+
+    private fun doKeyExchange() {
+        startActivityForResult(KEY_EXCHANGE_INTENT, KEY_EXCHANGE_REQUEST)
     }
 
     private fun startTransaction(paymentRequest: Map<String, Any>) {

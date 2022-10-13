@@ -72,6 +72,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<String?> _connectToNativePlatformForKeyExchange() async {
+    const channel = MethodChannel('checkout_channel');
+    try {
+      final value = await channel.invokeMethod('key_exchange');
+
+      return value;
+    } on PlatformException catch (e) {
+      debugPrint('Error: $e');
+
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
