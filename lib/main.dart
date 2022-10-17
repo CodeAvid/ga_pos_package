@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ga_pos/key_exchange_response.dart';
 import 'package:ga_pos/transaction_response_data.dart';
 
 void main() {
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _counter = "0";
 
   void _incrementCounter() {
-    _connectToNativePlatform().then((value) {
+    _connectToNativePlatformForKeyExchange().then((value) {
       setState(() {
         _counter = value.toString();
       });
@@ -72,12 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<String?> _connectToNativePlatformForKeyExchange() async {
+  Future<KeyExchangeResponse?> _connectToNativePlatformForKeyExchange() async {
     const channel = MethodChannel('checkout_channel');
     try {
       final value = await channel.invokeMethod('key_exchange');
 
-      return value;
+      return KeyExchangeResponse.fromJson(json.decode(value ?? ''));
     } on PlatformException catch (e) {
       debugPrint('Error: $e');
 

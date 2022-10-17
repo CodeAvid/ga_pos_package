@@ -15,7 +15,7 @@ class MainActivity : FlutterActivity() {
         private const val TRANSACTION_REQUEST = 49
         private const val KEY_EXCHANGE_REQUEST = 94
         private const val TRANSACTION_INTENT = "com.globalaccelerex.transaction"
-        private const val KEY_EXCHANGE_INTENT = "com.globalaccelerex.keyexchange"
+        private const val KEY_EXCHANGE_INTENT = "com.globalaccelerex.utility"
     }
 
     private lateinit var channelResult: MethodChannel.Result
@@ -109,7 +109,9 @@ class MainActivity : FlutterActivity() {
 
             when (status) {
                 "00" -> {
-                    channelResult.success("Successful")
+                    val successData = data.getStringExtra("data")
+
+                    channelResult.success(successData)
                 }
                 "02" -> {
                     channelResult.error(
@@ -136,7 +138,8 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun doKeyExchange() {
-        startActivityForResult(KEY_EXCHANGE_INTENT, KEY_EXCHANGE_REQUEST)
+        val intent = Intent(KEY_EXCHANGE_INTENT)
+        startActivityForResult(intent, KEY_EXCHANGE_REQUEST)
     }
 
     private fun startTransaction(paymentRequest: Map<String, Any>) {
