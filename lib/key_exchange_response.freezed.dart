@@ -59,7 +59,8 @@ mixin _$KeyExchangeResponse {
 abstract class $KeyExchangeResponseCopyWith<$Res> {
   factory $KeyExchangeResponseCopyWith(
           KeyExchangeResponse value, $Res Function(KeyExchangeResponse) then) =
-      _$KeyExchangeResponseCopyWithImpl<$Res>;
+      _$KeyExchangeResponseCopyWithImpl<$Res, KeyExchangeResponse>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'BillerID') String billerId,
       @JsonKey(name: 'MerchantID') String merchantId,
@@ -78,89 +79,91 @@ abstract class $KeyExchangeResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$KeyExchangeResponseCopyWithImpl<$Res>
+class _$KeyExchangeResponseCopyWithImpl<$Res, $Val extends KeyExchangeResponse>
     implements $KeyExchangeResponseCopyWith<$Res> {
   _$KeyExchangeResponseCopyWithImpl(this._value, this._then);
 
-  final KeyExchangeResponse _value;
   // ignore: unused_field
-  final $Res Function(KeyExchangeResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? billerId = freezed,
-    Object? merchantId = freezed,
-    Object? terminalId = freezed,
-    Object? serialNumber = freezed,
-    Object? ptsp = freezed,
-    Object? footerMessage = freezed,
-    Object? state = freezed,
-    Object? city = freezed,
-    Object? merchantName = freezed,
-    Object? merchantAddress = freezed,
-    Object? bankName = freezed,
-    Object? bankLogo = freezed,
-    Object? merchantCategoryCode = freezed,
-    Object? baseAppVersion = freezed,
+    Object? billerId = null,
+    Object? merchantId = null,
+    Object? terminalId = null,
+    Object? serialNumber = null,
+    Object? ptsp = null,
+    Object? footerMessage = null,
+    Object? state = null,
+    Object? city = null,
+    Object? merchantName = null,
+    Object? merchantAddress = null,
+    Object? bankName = null,
+    Object? bankLogo = null,
+    Object? merchantCategoryCode = null,
+    Object? baseAppVersion = null,
   }) {
     return _then(_value.copyWith(
-      billerId: billerId == freezed
+      billerId: null == billerId
           ? _value.billerId
           : billerId // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantId: merchantId == freezed
+      merchantId: null == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
               as String,
-      terminalId: terminalId == freezed
+      terminalId: null == terminalId
           ? _value.terminalId
           : terminalId // ignore: cast_nullable_to_non_nullable
               as String,
-      serialNumber: serialNumber == freezed
+      serialNumber: null == serialNumber
           ? _value.serialNumber
           : serialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      ptsp: ptsp == freezed
+      ptsp: null == ptsp
           ? _value.ptsp
           : ptsp // ignore: cast_nullable_to_non_nullable
               as String,
-      footerMessage: footerMessage == freezed
+      footerMessage: null == footerMessage
           ? _value.footerMessage
           : footerMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      city: city == freezed
+      city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantName: merchantName == freezed
+      merchantName: null == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantAddress: merchantAddress == freezed
+      merchantAddress: null == merchantAddress
           ? _value.merchantAddress
           : merchantAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      bankName: bankName == freezed
+      bankName: null == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
               as String,
-      bankLogo: bankLogo == freezed
+      bankLogo: null == bankLogo
           ? _value.bankLogo
           : bankLogo // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantCategoryCode: merchantCategoryCode == freezed
+      merchantCategoryCode: null == merchantCategoryCode
           ? _value.merchantCategoryCode
           : merchantCategoryCode // ignore: cast_nullable_to_non_nullable
               as String,
-      baseAppVersion: baseAppVersion == freezed
+      baseAppVersion: null == baseAppVersion
           ? _value.baseAppVersion
           : baseAppVersion // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -171,6 +174,7 @@ abstract class _$$_KeyExchangeResponseCopyWith<$Res>
           $Res Function(_$_KeyExchangeResponse) then) =
       __$$_KeyExchangeResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'BillerID') String billerId,
       @JsonKey(name: 'MerchantID') String merchantId,
@@ -190,86 +194,84 @@ abstract class _$$_KeyExchangeResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_KeyExchangeResponseCopyWithImpl<$Res>
-    extends _$KeyExchangeResponseCopyWithImpl<$Res>
+    extends _$KeyExchangeResponseCopyWithImpl<$Res, _$_KeyExchangeResponse>
     implements _$$_KeyExchangeResponseCopyWith<$Res> {
   __$$_KeyExchangeResponseCopyWithImpl(_$_KeyExchangeResponse _value,
       $Res Function(_$_KeyExchangeResponse) _then)
-      : super(_value, (v) => _then(v as _$_KeyExchangeResponse));
+      : super(_value, _then);
 
-  @override
-  _$_KeyExchangeResponse get _value => super._value as _$_KeyExchangeResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? billerId = freezed,
-    Object? merchantId = freezed,
-    Object? terminalId = freezed,
-    Object? serialNumber = freezed,
-    Object? ptsp = freezed,
-    Object? footerMessage = freezed,
-    Object? state = freezed,
-    Object? city = freezed,
-    Object? merchantName = freezed,
-    Object? merchantAddress = freezed,
-    Object? bankName = freezed,
-    Object? bankLogo = freezed,
-    Object? merchantCategoryCode = freezed,
-    Object? baseAppVersion = freezed,
+    Object? billerId = null,
+    Object? merchantId = null,
+    Object? terminalId = null,
+    Object? serialNumber = null,
+    Object? ptsp = null,
+    Object? footerMessage = null,
+    Object? state = null,
+    Object? city = null,
+    Object? merchantName = null,
+    Object? merchantAddress = null,
+    Object? bankName = null,
+    Object? bankLogo = null,
+    Object? merchantCategoryCode = null,
+    Object? baseAppVersion = null,
   }) {
     return _then(_$_KeyExchangeResponse(
-      billerId: billerId == freezed
+      billerId: null == billerId
           ? _value.billerId
           : billerId // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantId: merchantId == freezed
+      merchantId: null == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
               as String,
-      terminalId: terminalId == freezed
+      terminalId: null == terminalId
           ? _value.terminalId
           : terminalId // ignore: cast_nullable_to_non_nullable
               as String,
-      serialNumber: serialNumber == freezed
+      serialNumber: null == serialNumber
           ? _value.serialNumber
           : serialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      ptsp: ptsp == freezed
+      ptsp: null == ptsp
           ? _value.ptsp
           : ptsp // ignore: cast_nullable_to_non_nullable
               as String,
-      footerMessage: footerMessage == freezed
+      footerMessage: null == footerMessage
           ? _value.footerMessage
           : footerMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      city: city == freezed
+      city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantName: merchantName == freezed
+      merchantName: null == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantAddress: merchantAddress == freezed
+      merchantAddress: null == merchantAddress
           ? _value.merchantAddress
           : merchantAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      bankName: bankName == freezed
+      bankName: null == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
               as String,
-      bankLogo: bankLogo == freezed
+      bankLogo: null == bankLogo
           ? _value.bankLogo
           : bankLogo // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantCategoryCode: merchantCategoryCode == freezed
+      merchantCategoryCode: null == merchantCategoryCode
           ? _value.merchantCategoryCode
           : merchantCategoryCode // ignore: cast_nullable_to_non_nullable
               as String,
-      baseAppVersion: baseAppVersion == freezed
+      baseAppVersion: null == baseAppVersion
           ? _value.baseAppVersion
           : baseAppVersion // ignore: cast_nullable_to_non_nullable
               as String,
@@ -352,51 +354,55 @@ class _$_KeyExchangeResponse implements _KeyExchangeResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KeyExchangeResponse &&
-            const DeepCollectionEquality().equals(other.billerId, billerId) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantId, merchantId) &&
-            const DeepCollectionEquality()
-                .equals(other.terminalId, terminalId) &&
-            const DeepCollectionEquality()
-                .equals(other.serialNumber, serialNumber) &&
-            const DeepCollectionEquality().equals(other.ptsp, ptsp) &&
-            const DeepCollectionEquality()
-                .equals(other.footerMessage, footerMessage) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality().equals(other.city, city) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantName, merchantName) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantAddress, merchantAddress) &&
-            const DeepCollectionEquality().equals(other.bankName, bankName) &&
-            const DeepCollectionEquality().equals(other.bankLogo, bankLogo) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantCategoryCode, merchantCategoryCode) &&
-            const DeepCollectionEquality()
-                .equals(other.baseAppVersion, baseAppVersion));
+            (identical(other.billerId, billerId) ||
+                other.billerId == billerId) &&
+            (identical(other.merchantId, merchantId) ||
+                other.merchantId == merchantId) &&
+            (identical(other.terminalId, terminalId) ||
+                other.terminalId == terminalId) &&
+            (identical(other.serialNumber, serialNumber) ||
+                other.serialNumber == serialNumber) &&
+            (identical(other.ptsp, ptsp) || other.ptsp == ptsp) &&
+            (identical(other.footerMessage, footerMessage) ||
+                other.footerMessage == footerMessage) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.merchantName, merchantName) ||
+                other.merchantName == merchantName) &&
+            (identical(other.merchantAddress, merchantAddress) ||
+                other.merchantAddress == merchantAddress) &&
+            (identical(other.bankName, bankName) ||
+                other.bankName == bankName) &&
+            (identical(other.bankLogo, bankLogo) ||
+                other.bankLogo == bankLogo) &&
+            (identical(other.merchantCategoryCode, merchantCategoryCode) ||
+                other.merchantCategoryCode == merchantCategoryCode) &&
+            (identical(other.baseAppVersion, baseAppVersion) ||
+                other.baseAppVersion == baseAppVersion));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(billerId),
-      const DeepCollectionEquality().hash(merchantId),
-      const DeepCollectionEquality().hash(terminalId),
-      const DeepCollectionEquality().hash(serialNumber),
-      const DeepCollectionEquality().hash(ptsp),
-      const DeepCollectionEquality().hash(footerMessage),
-      const DeepCollectionEquality().hash(state),
-      const DeepCollectionEquality().hash(city),
-      const DeepCollectionEquality().hash(merchantName),
-      const DeepCollectionEquality().hash(merchantAddress),
-      const DeepCollectionEquality().hash(bankName),
-      const DeepCollectionEquality().hash(bankLogo),
-      const DeepCollectionEquality().hash(merchantCategoryCode),
-      const DeepCollectionEquality().hash(baseAppVersion));
+      billerId,
+      merchantId,
+      terminalId,
+      serialNumber,
+      ptsp,
+      footerMessage,
+      state,
+      city,
+      merchantName,
+      merchantAddress,
+      bankName,
+      bankLogo,
+      merchantCategoryCode,
+      baseAppVersion);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_KeyExchangeResponseCopyWith<_$_KeyExchangeResponse> get copyWith =>
       __$$_KeyExchangeResponseCopyWithImpl<_$_KeyExchangeResponse>(
           this, _$identity);

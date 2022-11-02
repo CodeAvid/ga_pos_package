@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ga_pos/key_exchange_response.dart';
+import 'package:ga_pos/scan_card_response.dart';
 import 'package:ga_pos/transaction_response_data.dart';
 
 void main() {
@@ -86,6 +87,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<ScanCardResponse?> _connectToNativePlatformForScanCard() async {
+    const channel = MethodChannel('checkout_channel');
+    try {
+      final value = await channel.invokeMethod('scan_card');
+
+      return ScanCardResponse.fromJson(json.decode(value ?? ''));
+    } on PlatformException catch (e) {
+      debugPrint('Error: $e');
+
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -126,13 +140,26 @@ class _MyHomePageState extends State<MyHomePage> {
               _counter,
               style: Theme.of(context).textTheme.headline4,
             ),
+            TextButton(
+              onPressed: () {
+                _connectToNativePlatform();
+              },
+              child: const Text('Checkout'),
+            ),
+            TextButton(
+              onPressed: () {
+                _connectToNativePlatformForKeyExchange();
+              },
+              child: const Text('Key Exchange'),
+            ),
+            TextButton(
+              onPressed: () {
+                _connectToNativePlatformForScanCard();
+              },
+              child: const Text('Key Exchange'),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

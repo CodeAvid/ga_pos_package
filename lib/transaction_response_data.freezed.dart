@@ -61,7 +61,8 @@ mixin _$TransactionResponseData {
 abstract class $TransactionResponseDataCopyWith<$Res> {
   factory $TransactionResponseDataCopyWith(TransactionResponseData value,
           $Res Function(TransactionResponseData) then) =
-      _$TransactionResponseDataCopyWithImpl<$Res>;
+      _$TransactionResponseDataCopyWithImpl<$Res, TransactionResponseData>;
+  @useResult
   $Res call(
       {String? aid,
       String? amount,
@@ -95,14 +96,17 @@ abstract class $TransactionResponseDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TransactionResponseDataCopyWithImpl<$Res>
+class _$TransactionResponseDataCopyWithImpl<$Res,
+        $Val extends TransactionResponseData>
     implements $TransactionResponseDataCopyWith<$Res> {
   _$TransactionResponseDataCopyWithImpl(this._value, this._then);
 
-  final TransactionResponseData _value;
   // ignore: unused_field
-  final $Res Function(TransactionResponseData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? aid = freezed,
@@ -136,123 +140,123 @@ class _$TransactionResponseDataCopyWithImpl<$Res>
     Object? currency = freezed,
   }) {
     return _then(_value.copyWith(
-      aid: aid == freezed
+      aid: freezed == aid
           ? _value.aid
           : aid // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: amount == freezed
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String?,
-      cashBackAmount: cashBackAmount == freezed
+      cashBackAmount: freezed == cashBackAmount
           ? _value.cashBackAmount
           : cashBackAmount // ignore: cast_nullable_to_non_nullable
               as String?,
-      appLabel: appLabel == freezed
+      appLabel: freezed == appLabel
           ? _value.appLabel
           : appLabel // ignore: cast_nullable_to_non_nullable
               as String?,
-      authcode: authcode == freezed
+      authcode: freezed == authcode
           ? _value.authcode
           : authcode // ignore: cast_nullable_to_non_nullable
               as String?,
-      cardExpireDate: cardExpireDate == freezed
+      cardExpireDate: freezed == cardExpireDate
           ? _value.cardExpireDate
           : cardExpireDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      cardHolderName: cardHolderName == freezed
+      cardHolderName: freezed == cardHolderName
           ? _value.cardHolderName
           : cardHolderName // ignore: cast_nullable_to_non_nullable
               as String?,
-      datetime: datetime == freezed
+      datetime: freezed == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      maskedPan: maskedPan == freezed
+      maskedPan: freezed == maskedPan
           ? _value.maskedPan
           : maskedPan // ignore: cast_nullable_to_non_nullable
               as String?,
-      message: message == freezed
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      nuban: nuban == freezed
+      nuban: freezed == nuban
           ? _value.nuban
           : nuban // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinType: pinType == freezed
+      pinType: freezed == pinType
           ? _value.pinType
           : pinType // ignore: cast_nullable_to_non_nullable
               as String?,
-      rrn: rrn == freezed
+      rrn: freezed == rrn
           ? _value.rrn
           : rrn // ignore: cast_nullable_to_non_nullable
               as String?,
-      stan: stan == freezed
+      stan: freezed == stan
           ? _value.stan
           : stan // ignore: cast_nullable_to_non_nullable
               as String?,
-      statuscode: statuscode == freezed
+      statuscode: freezed == statuscode
           ? _value.statuscode
           : statuscode // ignore: cast_nullable_to_non_nullable
               as String?,
-      terminalID: terminalID == freezed
+      terminalID: freezed == terminalID
           ? _value.terminalID
           : terminalID // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionType: transactionType == freezed
+      transactionType: freezed == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantName: merchantName == freezed
+      merchantName: freezed == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantId: merchantId == freezed
+      merchantId: freezed == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantAddress: merchantAddress == freezed
+      merchantAddress: freezed == merchantAddress
           ? _value.merchantAddress
           : merchantAddress // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantCategoryCode: merchantCategoryCode == freezed
+      merchantCategoryCode: freezed == merchantCategoryCode
           ? _value.merchantCategoryCode
           : merchantCategoryCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      bankName: bankName == freezed
+      bankName: freezed == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
               as String?,
-      bankLogo: bankLogo == freezed
+      bankLogo: freezed == bankLogo
           ? _value.bankLogo
           : bankLogo // ignore: cast_nullable_to_non_nullable
               as String?,
-      ptsp: ptsp == freezed
+      ptsp: freezed == ptsp
           ? _value.ptsp
           : ptsp // ignore: cast_nullable_to_non_nullable
               as String?,
-      ptspContact: ptspContact == freezed
+      ptspContact: freezed == ptspContact
           ? _value.ptspContact
           : ptspContact // ignore: cast_nullable_to_non_nullable
               as String?,
-      footerMessage: footerMessage == freezed
+      footerMessage: freezed == footerMessage
           ? _value.footerMessage
           : footerMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      deviceSerialNumber: deviceSerialNumber == freezed
+      deviceSerialNumber: freezed == deviceSerialNumber
           ? _value.deviceSerialNumber
           : deviceSerialNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      baseAppVersion: baseAppVersion == freezed
+      baseAppVersion: freezed == baseAppVersion
           ? _value.baseAppVersion
           : baseAppVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      currency: currency == freezed
+      currency: freezed == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -263,6 +267,7 @@ abstract class _$$_TransactionResponseDataCopyWith<$Res>
           $Res Function(_$_TransactionResponseData) then) =
       __$$_TransactionResponseDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? aid,
       String? amount,
@@ -297,16 +302,14 @@ abstract class _$$_TransactionResponseDataCopyWith<$Res>
 
 /// @nodoc
 class __$$_TransactionResponseDataCopyWithImpl<$Res>
-    extends _$TransactionResponseDataCopyWithImpl<$Res>
+    extends _$TransactionResponseDataCopyWithImpl<$Res,
+        _$_TransactionResponseData>
     implements _$$_TransactionResponseDataCopyWith<$Res> {
   __$$_TransactionResponseDataCopyWithImpl(_$_TransactionResponseData _value,
       $Res Function(_$_TransactionResponseData) _then)
-      : super(_value, (v) => _then(v as _$_TransactionResponseData));
+      : super(_value, _then);
 
-  @override
-  _$_TransactionResponseData get _value =>
-      super._value as _$_TransactionResponseData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? aid = freezed,
@@ -340,119 +343,119 @@ class __$$_TransactionResponseDataCopyWithImpl<$Res>
     Object? currency = freezed,
   }) {
     return _then(_$_TransactionResponseData(
-      aid == freezed
+      freezed == aid
           ? _value.aid
           : aid // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount == freezed
+      freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String?,
-      cashBackAmount == freezed
+      freezed == cashBackAmount
           ? _value.cashBackAmount
           : cashBackAmount // ignore: cast_nullable_to_non_nullable
               as String?,
-      appLabel == freezed
+      freezed == appLabel
           ? _value.appLabel
           : appLabel // ignore: cast_nullable_to_non_nullable
               as String?,
-      authcode == freezed
+      freezed == authcode
           ? _value.authcode
           : authcode // ignore: cast_nullable_to_non_nullable
               as String?,
-      cardExpireDate == freezed
+      freezed == cardExpireDate
           ? _value.cardExpireDate
           : cardExpireDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      cardHolderName == freezed
+      freezed == cardHolderName
           ? _value.cardHolderName
           : cardHolderName // ignore: cast_nullable_to_non_nullable
               as String?,
-      datetime == freezed
+      freezed == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      maskedPan == freezed
+      freezed == maskedPan
           ? _value.maskedPan
           : maskedPan // ignore: cast_nullable_to_non_nullable
               as String?,
-      message == freezed
+      freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      nuban == freezed
+      freezed == nuban
           ? _value.nuban
           : nuban // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinType == freezed
+      freezed == pinType
           ? _value.pinType
           : pinType // ignore: cast_nullable_to_non_nullable
               as String?,
-      rrn == freezed
+      freezed == rrn
           ? _value.rrn
           : rrn // ignore: cast_nullable_to_non_nullable
               as String?,
-      stan == freezed
+      freezed == stan
           ? _value.stan
           : stan // ignore: cast_nullable_to_non_nullable
               as String?,
-      statuscode == freezed
+      freezed == statuscode
           ? _value.statuscode
           : statuscode // ignore: cast_nullable_to_non_nullable
               as String?,
-      terminalID == freezed
+      freezed == terminalID
           ? _value.terminalID
           : terminalID // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionType == freezed
+      freezed == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantName == freezed
+      freezed == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantId == freezed
+      freezed == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantAddress == freezed
+      freezed == merchantAddress
           ? _value.merchantAddress
           : merchantAddress // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantCategoryCode == freezed
+      freezed == merchantCategoryCode
           ? _value.merchantCategoryCode
           : merchantCategoryCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      bankName == freezed
+      freezed == bankName
           ? _value.bankName
           : bankName // ignore: cast_nullable_to_non_nullable
               as String?,
-      bankLogo == freezed
+      freezed == bankLogo
           ? _value.bankLogo
           : bankLogo // ignore: cast_nullable_to_non_nullable
               as String?,
-      ptsp == freezed
+      freezed == ptsp
           ? _value.ptsp
           : ptsp // ignore: cast_nullable_to_non_nullable
               as String?,
-      ptspContact == freezed
+      freezed == ptspContact
           ? _value.ptspContact
           : ptspContact // ignore: cast_nullable_to_non_nullable
               as String?,
-      footerMessage == freezed
+      freezed == footerMessage
           ? _value.footerMessage
           : footerMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      deviceSerialNumber == freezed
+      freezed == deviceSerialNumber
           ? _value.deviceSerialNumber
           : deviceSerialNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      baseAppVersion == freezed
+      freezed == baseAppVersion
           ? _value.baseAppVersion
           : baseAppVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      currency == freezed
+      freezed == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -566,88 +569,96 @@ class _$_TransactionResponseData implements _TransactionResponseData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TransactionResponseData &&
-            const DeepCollectionEquality().equals(other.aid, aid) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality()
-                .equals(other.cashBackAmount, cashBackAmount) &&
-            const DeepCollectionEquality().equals(other.appLabel, appLabel) &&
-            const DeepCollectionEquality().equals(other.authcode, authcode) &&
-            const DeepCollectionEquality()
-                .equals(other.cardExpireDate, cardExpireDate) &&
-            const DeepCollectionEquality()
-                .equals(other.cardHolderName, cardHolderName) &&
-            const DeepCollectionEquality().equals(other.datetime, datetime) &&
-            const DeepCollectionEquality().equals(other.maskedPan, maskedPan) &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.nuban, nuban) &&
-            const DeepCollectionEquality().equals(other.pinType, pinType) &&
-            const DeepCollectionEquality().equals(other.rrn, rrn) &&
-            const DeepCollectionEquality().equals(other.stan, stan) &&
-            const DeepCollectionEquality()
-                .equals(other.statuscode, statuscode) &&
-            const DeepCollectionEquality()
-                .equals(other.terminalID, terminalID) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionType, transactionType) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantName, merchantName) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantId, merchantId) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantAddress, merchantAddress) &&
-            const DeepCollectionEquality()
-                .equals(other.merchantCategoryCode, merchantCategoryCode) &&
-            const DeepCollectionEquality().equals(other.bankName, bankName) &&
-            const DeepCollectionEquality().equals(other.bankLogo, bankLogo) &&
-            const DeepCollectionEquality().equals(other.ptsp, ptsp) &&
-            const DeepCollectionEquality()
-                .equals(other.ptspContact, ptspContact) &&
-            const DeepCollectionEquality()
-                .equals(other.footerMessage, footerMessage) &&
-            const DeepCollectionEquality()
-                .equals(other.deviceSerialNumber, deviceSerialNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.baseAppVersion, baseAppVersion) &&
-            const DeepCollectionEquality().equals(other.currency, currency));
+            (identical(other.aid, aid) || other.aid == aid) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.cashBackAmount, cashBackAmount) ||
+                other.cashBackAmount == cashBackAmount) &&
+            (identical(other.appLabel, appLabel) ||
+                other.appLabel == appLabel) &&
+            (identical(other.authcode, authcode) ||
+                other.authcode == authcode) &&
+            (identical(other.cardExpireDate, cardExpireDate) ||
+                other.cardExpireDate == cardExpireDate) &&
+            (identical(other.cardHolderName, cardHolderName) ||
+                other.cardHolderName == cardHolderName) &&
+            (identical(other.datetime, datetime) ||
+                other.datetime == datetime) &&
+            (identical(other.maskedPan, maskedPan) ||
+                other.maskedPan == maskedPan) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.nuban, nuban) || other.nuban == nuban) &&
+            (identical(other.pinType, pinType) || other.pinType == pinType) &&
+            (identical(other.rrn, rrn) || other.rrn == rrn) &&
+            (identical(other.stan, stan) || other.stan == stan) &&
+            (identical(other.statuscode, statuscode) ||
+                other.statuscode == statuscode) &&
+            (identical(other.terminalID, terminalID) ||
+                other.terminalID == terminalID) &&
+            (identical(other.transactionType, transactionType) ||
+                other.transactionType == transactionType) &&
+            (identical(other.merchantName, merchantName) ||
+                other.merchantName == merchantName) &&
+            (identical(other.merchantId, merchantId) ||
+                other.merchantId == merchantId) &&
+            (identical(other.merchantAddress, merchantAddress) ||
+                other.merchantAddress == merchantAddress) &&
+            (identical(other.merchantCategoryCode, merchantCategoryCode) ||
+                other.merchantCategoryCode == merchantCategoryCode) &&
+            (identical(other.bankName, bankName) ||
+                other.bankName == bankName) &&
+            (identical(other.bankLogo, bankLogo) ||
+                other.bankLogo == bankLogo) &&
+            (identical(other.ptsp, ptsp) || other.ptsp == ptsp) &&
+            (identical(other.ptspContact, ptspContact) ||
+                other.ptspContact == ptspContact) &&
+            (identical(other.footerMessage, footerMessage) ||
+                other.footerMessage == footerMessage) &&
+            (identical(other.deviceSerialNumber, deviceSerialNumber) ||
+                other.deviceSerialNumber == deviceSerialNumber) &&
+            (identical(other.baseAppVersion, baseAppVersion) ||
+                other.baseAppVersion == baseAppVersion) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(aid),
-        const DeepCollectionEquality().hash(amount),
-        const DeepCollectionEquality().hash(cashBackAmount),
-        const DeepCollectionEquality().hash(appLabel),
-        const DeepCollectionEquality().hash(authcode),
-        const DeepCollectionEquality().hash(cardExpireDate),
-        const DeepCollectionEquality().hash(cardHolderName),
-        const DeepCollectionEquality().hash(datetime),
-        const DeepCollectionEquality().hash(maskedPan),
-        const DeepCollectionEquality().hash(message),
-        const DeepCollectionEquality().hash(nuban),
-        const DeepCollectionEquality().hash(pinType),
-        const DeepCollectionEquality().hash(rrn),
-        const DeepCollectionEquality().hash(stan),
-        const DeepCollectionEquality().hash(statuscode),
-        const DeepCollectionEquality().hash(terminalID),
-        const DeepCollectionEquality().hash(transactionType),
-        const DeepCollectionEquality().hash(merchantName),
-        const DeepCollectionEquality().hash(merchantId),
-        const DeepCollectionEquality().hash(merchantAddress),
-        const DeepCollectionEquality().hash(merchantCategoryCode),
-        const DeepCollectionEquality().hash(bankName),
-        const DeepCollectionEquality().hash(bankLogo),
-        const DeepCollectionEquality().hash(ptsp),
-        const DeepCollectionEquality().hash(ptspContact),
-        const DeepCollectionEquality().hash(footerMessage),
-        const DeepCollectionEquality().hash(deviceSerialNumber),
-        const DeepCollectionEquality().hash(baseAppVersion),
-        const DeepCollectionEquality().hash(currency)
+        aid,
+        amount,
+        cashBackAmount,
+        appLabel,
+        authcode,
+        cardExpireDate,
+        cardHolderName,
+        datetime,
+        maskedPan,
+        message,
+        nuban,
+        pinType,
+        rrn,
+        stan,
+        statuscode,
+        terminalID,
+        transactionType,
+        merchantName,
+        merchantId,
+        merchantAddress,
+        merchantCategoryCode,
+        bankName,
+        bankLogo,
+        ptsp,
+        ptspContact,
+        footerMessage,
+        deviceSerialNumber,
+        baseAppVersion,
+        currency
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TransactionResponseDataCopyWith<_$_TransactionResponseData>
       get copyWith =>
           __$$_TransactionResponseDataCopyWithImpl<_$_TransactionResponseData>(
