@@ -23,7 +23,6 @@ class MainActivity : FlutterActivity() {
     }
 
     private lateinit var channelResult: MethodChannel.Result
-    private lateinit var cardScanSheet: CardScanSheet
 
     private val gson = Gson()
 
@@ -164,11 +163,13 @@ class MainActivity : FlutterActivity() {
                 }
             }
         } else {
-            channelResult.error(
-                "com.globalaccelerex.mpos:payment",
-                "An error occurred getting results",
-                ""
-            )
+            if (this::channelResult.isInitialized) {
+                channelResult.error(
+                    "com.globalaccelerex.mpos:payment",
+                    "An error occurred getting results",
+                    ""
+                )
+            }
         }
     }
 

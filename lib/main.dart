@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ga_pos/key_exchange_response.dart';
@@ -36,6 +37,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _cardDetailsString = '';
+
   Future<TransactionResponseData?> _connectToNativePlatform() async {
     const channel = MethodChannel('checkout_channel');
     try {
@@ -81,6 +84,28 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _scanCard() async {
+    final CardDetails? cardDetails = await CardScanner.scanCard(
+      scanOptions: const CardScanOptions(
+        scanCardHolderName: true,
+        enableDebugLogs: true,
+        validCardsToScanBeforeFinishingScan: 5,
+        possibleCardHolderNamePositions: [
+          CardHolderNameScanPosition.aboveCardNumber,
+        ],
+      ),
+    );
+    // mounted is used to check if the Widget is currently in the widget tree
+    // or it has not been disposed.
+    // It is useful to ensure you do not call setState(() {})
+    // on a disposed widget
+    if (!mounted || cardDetails == null) return;
+    setState(() {
+      debugPrint(cardDetails.map.toString());
+      _cardDetailsString = cardDetails.map.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +133,13 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Scan Card'),
             ),
+            TextButton(
+              onPressed: () {
+                _scanCard();
+              },
+              child: const Text('Scan Card With CardScanner Flutter Plugin'),
+            ),
+            Text(_cardDetailsString),
           ],
         ),
       ),
