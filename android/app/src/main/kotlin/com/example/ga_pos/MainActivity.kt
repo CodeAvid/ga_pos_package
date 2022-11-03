@@ -4,12 +4,12 @@ import android.content.Intent
 import cards.pay.paycardsrecognizer.sdk.Card
 import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.google.gson.Gson
+import com.stripe.android.stripecardscan.cardscan.CardScanSheet
 import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-
 
 class MainActivity : FlutterActivity() {
 
@@ -23,6 +23,7 @@ class MainActivity : FlutterActivity() {
     }
 
     private lateinit var channelResult: MethodChannel.Result
+    private lateinit var cardScanSheet: CardScanSheet
 
     private val gson = Gson()
 
@@ -45,7 +46,7 @@ class MainActivity : FlutterActivity() {
                     doKeyExchange()
                 }
                 "scan_card" -> {
-                    scanCard()
+                    scanCardWithStripe()
                 }
                 else -> result.notImplemented()
             }
@@ -57,7 +58,7 @@ class MainActivity : FlutterActivity() {
 
         if (requestCode == TRANSACTION_REQUEST && resultCode == RESULT_OK) {
             val status = data!!.getStringExtra("status")
-            Log.d("ggg", "Status" + status!!)
+            Log.d(javaClass.simpleName, "Status" + status!!)
 
             when (status) {
                 "00" -> {
@@ -109,7 +110,7 @@ class MainActivity : FlutterActivity() {
             }
         } else if (requestCode == KEY_EXCHANGE_REQUEST && resultCode == RESULT_OK) {
             val status = data!!.getStringExtra("status")
-            Log.d("ggg", "Status" + status!!)
+            Log.d(javaClass.simpleName, "Status" + status!!)
 
             when (status) {
                 "00" -> {
@@ -144,7 +145,7 @@ class MainActivity : FlutterActivity() {
                                 "\"cardHolder\": \"${card.cardHolderName}\"," +
                                 "\"cardExpirationDate\": \"${card.expirationDate}\"" +
                                 "}"
-                    Log.d("ggg", "Card info: $cardData")
+                    Log.d(javaClass.simpleName, "Card info: $cardData")
                     channelResult.success(card)
                 }
                 RESULT_CANCELED -> {
@@ -187,5 +188,10 @@ class MainActivity : FlutterActivity() {
     private fun scanCard() {
         val intent: Intent = ScanCardIntent.Builder(this).build()
         startActivityForResult(intent, REQUEST_CODE_SCAN_CARD)
+    }
+
+    private fun scanCardWithStripe() {
+        val intent = Intent(this, ScanCardActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -7,6 +7,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="ga_pos">
         <activity
+            android:name=".ScanCardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scan_card"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
