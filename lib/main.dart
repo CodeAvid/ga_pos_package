@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _connectToNativePlatformForScanCard();
               },
-              child: const Text('Key Exchange'),
+              child: const Text('Scan Card'),
             ),
           ],
         ),
