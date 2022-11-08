@@ -49,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
           "print": "true",
         }
       });
-
       return TransactionResponseData.fromJson(json.decode(value ?? ''));
     } on PlatformException catch (e) {
       debugPrint('Error: $e');
@@ -62,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
     const channel = MethodChannel('checkout_channel');
     try {
       final value = await channel.invokeMethod('key_exchange');
-
       return KeyExchangeResponse.fromJson(json.decode(value ?? ''));
     } on PlatformException catch (e) {
       debugPrint('Error: $e');
@@ -75,7 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
     const channel = MethodChannel('checkout_channel');
     try {
       final value = await channel.invokeMethod('scan_card');
-
       return ScanCardResponse.fromJson(json.decode(value ?? ''));
     } on PlatformException catch (e) {
       debugPrint('Error: $e');
