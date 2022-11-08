@@ -106,6 +106,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future<void> _connectToNativePlatformForPrinting() async {
+    const channel = MethodChannel('print');
+    try {
+      final value = await channel.invokeMethod('checkout', {
+        "printData": {
+          // TODO: Put print details here
+        }
+      });
+    } on PlatformException catch (e) {
+      debugPrint('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
