@@ -4,6 +4,8 @@ import android.content.Intent
 import cards.pay.paycardsrecognizer.sdk.Card
 import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.google.gson.Gson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -244,6 +246,9 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun printReceipt(receipt: Map<String, Any>) {
+        val moshi: Moshi = Moshi.Builder().build()
+        val jsonAdapter: JsonAdapter<PrintObject> = moshi.adapter(PrintObject::class.java)
+
         val stringFields = mutableListOf<StringField>()
         for (key in receipt.keys) {
             if (receipt[key] != null) {
@@ -253,7 +258,7 @@ class MainActivity : FlutterActivity() {
 
         val printObject = PrintObject(listOf(addPrintField(stringFields)))
         val intent = Intent(PRINTER_INTENT)
-        intent.putExtra("printerData", printObject.toString())
+        intent.putExtra("printerData", jsonAdapter.toJson(printObject))
         startActivityForResult(intent, PRINT_REQUEST)
     }
 
