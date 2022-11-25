@@ -104,9 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _connectToNativePlatformForPrinting() async {
-    const channel = MethodChannel('print');
+    const channel = MethodChannel('checkout_channel');
     try {
-      final value = await channel.invokeMethod('checkout', {
+      final value = await channel.invokeMethod('print', {
         "printData": {
           // TODO: Put print details here
         }
@@ -145,7 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
-                _scanCard();
+                _connectToNativePlatformForPrinting();
+                // _scanCard();
               },
               child: const Text('Scan Card With CardScanner Flutter Plugin'),
             ),
