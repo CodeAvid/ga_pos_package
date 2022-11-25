@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.5
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
-  credit_card_scanner: ^1.0.5
+  credit_card_scanner:
+    git: https://github.com/ayevbeosa/card-scanner-flutter.git
 
 dev_dependencies:
   flutter_test:
