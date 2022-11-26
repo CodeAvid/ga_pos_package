@@ -92,6 +92,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.4.1"
+  card_scanner:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: c05bd0f8823f201d5f59ecb4aa5d707a8a41647c
+      url: "https://github.com/ayevbeosa/card-scanner-flutter.git"
+    source: git
+    version: "1.0.1-prerelease"
   characters:
     dependency: transitive
     description:
@@ -134,13 +143,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  credit_card_scanner:
-    dependency: "direct main"
-    description:
-      name: credit_card_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   crypto:
     dependency: transitive
     description:

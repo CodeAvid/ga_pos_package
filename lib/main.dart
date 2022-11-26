@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:credit_card_scanner/credit_card_scanner.dart';
+import 'package:card_scanner/card_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ga_pos/key_exchange_response.dart';
@@ -145,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
-                _connectToNativePlatformForPrinting();
-                // _scanCard();
+                // _connectToNativePlatformForPrinting();
+                _scanCard();
               },
               child: const Text('Scan Card With CardScanner Flutter Plugin'),
             ),
