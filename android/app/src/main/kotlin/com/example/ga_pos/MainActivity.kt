@@ -9,8 +9,10 @@ import com.squareup.moshi.Moshi
 import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+
 
 class MainActivity : FlutterActivity() {
 
@@ -250,15 +252,14 @@ class MainActivity : FlutterActivity() {
         val jsonAdapter: JsonAdapter<PrintObject> = moshi.adapter(PrintObject::class.java)
 
         val stringFields = mutableListOf<StringField>()
-        for (key in receipt.keys) {
-            if (receipt[key] != null) {
-                stringFields.add(addStringField(key, receipt[key]!!))
-            }
-        }
+
+        stringFields.add(addStringField("MerchantName:", receipt["merchantName"]!!))
+        stringFields.add(addStringField("Location:", receipt["merchantLocation"]!!))
+
 
         val printObject = PrintObject(listOf(addPrintField(stringFields)))
         val intent = Intent(PRINTER_INTENT)
-        intent.putExtra("printerData", jsonAdapter.toJson(printObject))
+        intent.putExtra("jsonData", jsonAdapter.toJson(printObject))
         startActivityForResult(intent, PRINT_REQUEST)
     }
 
@@ -281,11 +282,16 @@ class MainActivity : FlutterActivity() {
         isBold = true
     )
 
-    private fun addBodyTextField(body: String) = TextField(
-        text = body,
-        align = "centre",
-        size = "normal",
-        isBold = false
-    )
-
+    private fun addBodyTextField(
+        body: String,
+        align: String = "centre",
+        size: String = "normal",
+        isBold: Boolean = false,
+    ) =
+        TextField(
+            text = body,
+            align = align,
+            size = size,
+            isBold = isBold
+        )
 }

@@ -13,12 +13,12 @@ data class PrintField(
 data class StringField(
     @Json(name = "isMultiline") val isMultiline: Boolean,
     @Json(name = "header") val header: TextField,
-    @Json(name = "body") val body: TextField
+    @Json(name = "body") val body: TextField,
 )
 
 data class TextField(
     @Json(name = "text") val text: String,
-    @Json(name = "align") val align: String?,
+    @Json(name = "alignment") val align: String?,
     @Json(name = "size") val size: String?,
     @Json(name = "isBold") val isBold: Boolean?
 )
