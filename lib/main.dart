@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:credit_card_scanner/credit_card_scanner.dart';
+import 'package:card_scanner/card_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ga_pos/key_exchange_response.dart';
@@ -104,9 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _connectToNativePlatformForPrinting() async {
-    const channel = MethodChannel('print');
+    const channel = MethodChannel('checkout_channel');
     try {
-      final value = await channel.invokeMethod('checkout', {
+      final value = await channel.invokeMethod('print', {
         "printData": {
           // TODO: Put print details here
         }
@@ -145,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
+                // _connectToNativePlatformForPrinting();
                 _scanCard();
               },
               child: const Text('Scan Card With CardScanner Flutter Plugin'),
