@@ -9,7 +9,6 @@ import com.squareup.moshi.Moshi
 import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
 
@@ -251,40 +250,177 @@ class MainActivity : FlutterActivity() {
         val moshi: Moshi = Moshi.Builder().build()
         val jsonAdapter: JsonAdapter<PrintObject> = moshi.adapter(PrintObject::class.java)
 
-        val stringFields = mutableListOf<StringField>()
+        val printFields = mutableListOf<PrintField>()
 
-        stringFields.add(addStringField("MerchantName:", receipt["merchantName"]!!))
-        stringFields.add(addStringField("Location:", receipt["merchantLocation"]!!))
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("****CUSTOMER COPY****", isBold = true),
+                        addBodyTextField("")
+                    ),
+                    addStringField(addHeaderTextField(""), addBodyTextField(""), true)
+                ),
+                8
+            )
+        )
 
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("MerchantName: ", "left"),
+                        addBodyTextField(
+                            (receipt["merchantName"] ?: "").toString().uppercase(),
+                            "left"
+                        ),
+                        false
+                    ),
+                    addStringField(
+                        addHeaderTextField("Merchant Location: ", "left"),
+                        addBodyTextField(
+                            (receipt["merchantLocation"] ?: "").toString().uppercase(),
+                            "left"
+                        ),
+                        false
+                    ),
+                    addStringField(
+                        addHeaderTextField("Terminal ID: ", "left"),
+                        addBodyTextField(
+                            (receipt["terminalId"] ?: "").toString().uppercase(),
+                            "left"
+                        ),
+                        false
+                    ),
+                )
+            )
+        )
 
-        val printObject = PrintObject(listOf(addPrintField(stringFields)))
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("------------------------"),
+                        addBodyTextField("")
+                    ),
+                ),
+            )
+        )
+
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("STAN: ", "left"),
+                        addBodyTextField((receipt["originalTransStan"] ?: "").toString(), "left")
+                    ),
+                    addStringField(
+                        addHeaderTextField("DATE/TIME: ", "left"),
+                        addBodyTextField((receipt["transmissionDate"] ?: "").toString(), "left")
+                    ),
+                ),
+            )
+        )
+
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("------------------------"),
+                        addBodyTextField("")
+                    ),
+                ),
+            )
+        )
+
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("AMOUNT:  ", isBold = true),
+                        addBodyTextField(
+                            (receipt["originalMinorAmount"] ?: "").toString(),
+                            size = "large",
+                            isBold = true
+                        ),
+                        false
+                    ),
+                ),
+            )
+        )
+
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("------------------------"),
+                        addBodyTextField("")
+                    ),
+                ),
+            )
+        )
+
+        printFields.add(
+            addPrintField(
+                listOf(
+                    addStringField(
+                        addHeaderTextField("", isBold = true),
+                        addBodyTextField(
+                          "Transaction " + (receipt["transactionComment"] ?: "").toString(),
+                            size = "large",
+                            isBold = true
+                        ),
+                        false
+                    ),
+                    addStringField(
+                        addHeaderTextField("------------------------"),
+                        addBodyTextField("")
+                    ),
+                    addStringField(
+                        addHeaderTextField("", isBold = true),
+                        addBodyTextField(
+                          (receipt["footer"] ?: "").toString(),
+                            size = "small",
+                        ),
+                        false
+                    ),
+                ),
+            )
+        )
+
+        val printObject = PrintObject(printFields)
         val intent = Intent(PRINTER_INTENT)
         intent.putExtra("jsonData", jsonAdapter.toJson(printObject))
         startActivityForResult(intent, PRINT_REQUEST)
     }
 
-    private fun addPrintField(stringFields: List<StringField>) = PrintField(
+    private fun addPrintField(stringFields: List<StringField>, letterSpacing: Int = 5) = PrintField(
         filename = "",
-        letterSpacing = 5,
+        letterSpacing = letterSpacing,
         stringFields = stringFields
     )
 
-    private fun addStringField(key: String, value: Any) = StringField(
-        isMultiline = true,
-        header = addHeaderTextField(key),
-        body = addBodyTextField(value.toString()),
-    )
+    private fun addStringField(header: TextField, body: TextField, isMultiline: Boolean = true) =
+        StringField(
+            isMultiline = isMultiline,
+            header = header,
+            body = body,
+        )
 
-    private fun addHeaderTextField(header: String) = TextField(
+    private fun addHeaderTextField(
+        header: String, align: String = "center",
+        size: String = "large",
+        isBold: Boolean = false,
+    ) = TextField(
         text = header,
-        align = "centre",
-        size = "large",
-        isBold = true
+        align = align,
+        size = size,
+        isBold = isBold
     )
 
     private fun addBodyTextField(
         body: String,
-        align: String = "centre",
+        align: String = "center",
         size: String = "normal",
         isBold: Boolean = false,
     ) =
