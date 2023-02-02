@@ -12,7 +12,6 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
 
-
 class MainActivity : FlutterActivity() {
 
     companion object {
@@ -259,15 +258,7 @@ class MainActivity : FlutterActivity() {
                         addHeaderTextField("****CUSTOMER COPY****", isBold = true),
                         addBodyTextField("")
                     ),
-                    addStringField(addHeaderTextField(""), addBodyTextField(""), true)
-                ),
-                8
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
+                    addStringField(addHeaderTextField(""), addBodyTextField(""), true),
                     addStringField(
                         addHeaderTextField("MerchantName: ", "left"),
                         addBodyTextField(
@@ -292,24 +283,10 @@ class MainActivity : FlutterActivity() {
                         ),
                         false
                     ),
-                )
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("------------------------"),
                         addBodyTextField("")
                     ),
-                ),
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("STAN: ", "left"),
                         addBodyTextField((receipt["originalTransStan"] ?: "").toString(), "left")
@@ -318,24 +295,10 @@ class MainActivity : FlutterActivity() {
                         addHeaderTextField("DATE/TIME: ", "left"),
                         addBodyTextField((receipt["transmissionDate"] ?: "").toString(), "left")
                     ),
-                ),
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("------------------------"),
                         addBodyTextField("")
                     ),
-                ),
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("AMOUNT:  ", isBold = true),
                         addBodyTextField(
@@ -345,28 +308,14 @@ class MainActivity : FlutterActivity() {
                         ),
                         false
                     ),
-                ),
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("------------------------"),
                         addBodyTextField("")
                     ),
-                ),
-            )
-        )
-
-        printFields.add(
-            addPrintField(
-                listOf(
                     addStringField(
                         addHeaderTextField("", isBold = true),
                         addBodyTextField(
-                          "Transaction " + (receipt["transactionComment"] ?: "").toString(),
+                            "Transaction " + (receipt["transactionComment"] ?: "").toString(),
                             size = "large",
                             isBold = true
                         ),
@@ -379,14 +328,15 @@ class MainActivity : FlutterActivity() {
                     addStringField(
                         addHeaderTextField("", isBold = true),
                         addBodyTextField(
-                          (receipt["footer"] ?: "").toString(),
+                            (receipt["footer"] ?: "").toString(),
                             size = "small",
                         ),
                         false
                     ),
-                ),
+                )
             )
         )
+
 
         val printObject = PrintObject(printFields)
         val intent = Intent(PRINTER_INTENT)
