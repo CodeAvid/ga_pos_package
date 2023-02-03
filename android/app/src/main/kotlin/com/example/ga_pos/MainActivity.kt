@@ -6,6 +6,7 @@ import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
 import com.google.gson.Gson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -28,6 +29,8 @@ class MainActivity : FlutterActivity() {
     private lateinit var channelResult: MethodChannel.Result
 
     private val gson = Gson()
+
+    private val stringFields = mutableListOf<StringField>()
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
@@ -245,100 +248,71 @@ class MainActivity : FlutterActivity() {
         startActivity(intent)
     }
 
+
     private fun printReceipt(receipt: Map<String, Any>) {
-        val moshi: Moshi = Moshi.Builder().build()
+        val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<PrintObject> = moshi.adapter(PrintObject::class.java)
 
-        val printFields = mutableListOf<PrintField>()
-
-        printFields.add(
-            addPrintField(
-                listOf(
-                    addStringField(
-                        addHeaderTextField("****CUSTOMER COPY****", isBold = true),
-                        addBodyTextField("")
-                    ),
-                    addStringField(addHeaderTextField(""), addBodyTextField(""), true),
-                    addStringField(
-                        addHeaderTextField("MerchantName: ", "left"),
-                        addBodyTextField(
-                            (receipt["merchantName"] ?: "").toString().uppercase(),
-                            "left"
-                        ),
-                        false
-                    ),
-                    addStringField(
-                        addHeaderTextField("Merchant Location: ", "left"),
-                        addBodyTextField(
-                            (receipt["merchantLocation"] ?: "").toString().uppercase(),
-                            "left"
-                        ),
-                        false
-                    ),
-                    addStringField(
-                        addHeaderTextField("Terminal ID: ", "left"),
-                        addBodyTextField(
-                            (receipt["terminalId"] ?: "").toString().uppercase(),
-                            "left"
-                        ),
-                        false
-                    ),
-                    addStringField(
-                        addHeaderTextField("------------------------"),
-                        addBodyTextField("")
-                    ),
-                    addStringField(
-                        addHeaderTextField("STAN: ", "left"),
-                        addBodyTextField((receipt["originalTransStan"] ?: "").toString(), "left")
-                    ),
-                    addStringField(
-                        addHeaderTextField("DATE/TIME: ", "left"),
-                        addBodyTextField((receipt["transmissionDate"] ?: "").toString(), "left")
-                    ),
-                    addStringField(
-                        addHeaderTextField("------------------------"),
-                        addBodyTextField("")
-                    ),
-                    addStringField(
-                        addHeaderTextField("AMOUNT:  ", isBold = true),
-                        addBodyTextField(
-                            (receipt["originalMinorAmount"] ?: "").toString(),
-                            size = "large",
-                            isBold = true
-                        ),
-                        false
-                    ),
-                    addStringField(
-                        addHeaderTextField("------------------------"),
-                        addBodyTextField("")
-                    ),
-                    addStringField(
-                        addHeaderTextField("", isBold = true),
-                        addBodyTextField(
-                            "Transaction " + (receipt["transactionComment"] ?: "").toString(),
-                            size = "large",
-                            isBold = true
-                        ),
-                        false
-                    ),
-                    addStringField(
-                        addHeaderTextField("------------------------"),
-                        addBodyTextField("")
-                    ),
-                    addStringField(
-                        addHeaderTextField("", isBold = true),
-                        addBodyTextField(
-                            (receipt["footer"] ?: "").toString(),
-                            size = "small",
-                        ),
-                        false
-                    ),
-                )
-            )
+        printStringField(
+            addHeader("****CUSTOMER COPY****", isBold = true),
+            null
+        )
+        printEmptySpace()
+        printStringField(
+            addHeader("MerchantName: ", "left"),
+            addBody((receipt["merchantName"]).toString().uppercase(), "left"),
+            false
+        )
+        printStringField(
+            addHeader("Merchant Location: ", "left"),
+            addBody((receipt["merchantLocation"] ?: "").toString().uppercase(), "left"),
+            false
+        )
+        printStringField(
+            addHeader("Terminal ID: ", "left"),
+            addBody((receipt["terminalId"] ?: "").toString().uppercase(), "left"),
+            false
+        )
+        printEmptySpace()
+        printStringField(
+            addHeader("STAN: ", "left"),
+            addBody((receipt["originalTransStan"] ?: "").toString(), "left")
+        )
+        printStringField(
+            addHeader("DATE/TIME: ", "left"),
+            addBody((receipt["transmissionDate"] ?: "").toString(), "left")
+        )
+        printEmptySpace()
+        printStringField(
+            addHeader("AMOUNT:  ", isBold = true),
+            addBody(
+                (receipt["originalMinorAmount"] ?: "").toString(),
+                size = "large",
+                isBold = true
+            ),
+        )
+        printEmptySpace()
+        printStringField(
+            addHeader("", isBold = true),
+            addBody(
+                "Transaction " + (receipt["transactionComment"] ?: "").toString(),
+                size = "large",
+                isBold = true
+            ),
+            false
+        )
+        printEmptySpace()
+        printStringField(
+            addHeader("", isBold = false, align = "center"),
+            addBody(
+                (receipt["footer"] ?: "").toString(),
+                size = "small",
+            ),
+            false
         )
 
 
-        val printObject = PrintObject(printFields)
+        val printObject = PrintObject(listOf(addPrintField(stringFields)))
         val intent = Intent(PRINTER_INTENT)
         intent.putExtra("jsonData", jsonAdapter.toJson(printObject))
         startActivityForResult(intent, PRINT_REQUEST)
@@ -350,15 +324,45 @@ class MainActivity : FlutterActivity() {
         stringFields = stringFields
     )
 
-    private fun addStringField(header: TextField, body: TextField, isMultiline: Boolean = true) =
-        StringField(
-            isMultiline = isMultiline,
-            header = header,
-            body = body,
+    /**
+     * Use null for Header only [StringField]
+     */
+    private fun printStringField(header: TextField, body: TextField?, isMultiline: Boolean = true) {
+        if (body != null) {
+            if (body.text.isNotEmpty()) {
+                stringFields.add(
+                    StringField(
+                        isMultiline = isMultiline,
+                        header = header,
+                        body = body,
+                    )
+                )
+            }
+        } else {
+            stringFields.add(
+                StringField(
+                    isMultiline = isMultiline,
+                    header = header,
+                    body = addBody(""),
+                )
+            )
+        }
+    }
+
+    private fun printEmptySpace() {
+        stringFields.add(
+            StringField(
+                isMultiline = true,
+                header = addHeader("------------------------------------------------------"),
+                body = addBody(""),
+            )
         )
 
-    private fun addHeaderTextField(
-        header: String, align: String = "center",
+    }
+
+    private fun addHeader(
+        header: String,
+        align: String = "center",
         size: String = "large",
         isBold: Boolean = false,
     ) = TextField(
@@ -368,7 +372,7 @@ class MainActivity : FlutterActivity() {
         isBold = isBold
     )
 
-    private fun addBodyTextField(
+    private fun addBody(
         body: String,
         align: String = "center",
         size: String = "normal",

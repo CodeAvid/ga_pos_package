@@ -79,4 +79,5 @@ dependencies {
     implementation 'com.stripe:stripecardscan:20.15.3'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.squareup.moshi:moshi:1.14.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
 }
